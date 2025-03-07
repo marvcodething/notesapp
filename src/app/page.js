@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const tabContent = [
-  { title: "Placeholder title for Tab 1", text: "Placeholder text for Tab 1", video: "video1.mp4", thumbnail: "thumbnail1.jpg", date: "February 1, 2025 at 10:00AM" },
+  { title: "Things to do", text: "go to bed maybe??\nRead a book, cry some more.\nmaybe go to the zoo", video: "video1.mp4", thumbnail: "thumbnail1.jpg", date: "February 1, 2025 at 10:00AM" },
   { title: "Placeholder title for Tab 2", text: "Placeholder text for Tab 2", video: "video2.mp4", thumbnail: "thumbnail2.jpg", date: "February 15, 2025 at 2:30PM" },
   { title: "Placeholder title for Tab 3", text: "Placeholder text for Tab 3", video: "video3.mp4", thumbnail: "thumbnail3.jpg", date: "March 3, 2025 at 1:00PM" },
   { title: "Placeholder title for Tab 4", text: "Placeholder text for Tab 4", video: "video4.mp4", thumbnail: "thumbnail4.jpg", date: "March 10, 2025 at 4:45PM" },
@@ -20,65 +21,116 @@ const tabContent = [
   { title: "Placeholder title for Tab 15", text: "Placeholder text for Tab 15", video: "video15.mp4", thumbnail: "thumbnail15.jpg", date: "February 18, 2025 at 4:00PM" },
   { title: "Placeholder title for Tab 16", text: "Placeholder text for Tab 16", video: "video16.mp4", thumbnail: "thumbnail16.jpg", date: "March 30, 2025 at 9:00AM" },
 ];
-
-//TODO: ADD A FAKE NAVBAR
-//TODO: MAKE THE MOBILE VERSION(MUCH HARDER)
-//TODO: FIX THE STYLING
-//TODO: FIGURE OUT FONTS
-
 export default function Home() {
   const [selectedTab, setSelectedTab] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setShowContent(false);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleTabClick = (tabIndex) => {
     setSelectedTab(tabIndex);
+    if (isMobile) setShowContent(true);
+  };
+
+  const handleBack = () => {
+    setShowContent(false);
   };
 
   return (
     <div className="flex min-h-screen">
       {/* Left Section: Tabs */}
-      <div className="w-1/4 bg-neutral-800 text-white overflow-y-auto h-screen border-r-2 border-black border">
-        <h1 className={`sticky top-0 border-b border-gray-700 px-4 w-full flex mx-auto text-left py-2 font-semibold bg-neutral-800 z-10 opacity-97`}>Previous 30 Days</h1>
-        <div className="flex flex-col w-full">
-          {tabContent.map((tab, i) => (
-            <div 
-              key={i}
-              onClick={() => handleTabClick(i)}
-              className={`w-[80%] mx-auto ps-4 pe-2 py-4 text-left border-b border-gray-600 cursor-pointer ${selectedTab === i ? "bg-fuchsia-400 opacity-80 rounded-xl text-white" : ""} font-sans`}
-              style={{ fontFamily: "'SF Pro Display', sans-serif" }}
-            >
-              <div className="font-bold">{tab.title}</div>
-              <div className="flex space-x-2">
-                <div className="text-sm text-gray-400">{tab.date.split(' at ')[1]}</div>
-                <div className="pl-1 text-sm text-gray-500 truncate">{tab.text.substring(0, 30)}...</div>
+      <div
+        className={`${isMobile ? (showContent ? "opacity-0 transition-opacity duration-300" : "w-full bg-neutral-800") : "w-1/4 bg-neutral-800 border-r-2"} text-white overflow-y-auto h-screen border-black border`}
+      >
+        <h1 className={`${isMobile ? "sticky top-0 z-50 bg-neutral-800":""} p-3 text-2xl font-extrabold font-sans`}>Notes</h1>
+        <h1 className={`${isMobile ? "bg-neutral-800 top-12" : "sticky top-0 bg-neutral-800"} border-b border-gray-700 px-4 w-full flex mx-auto text-left py-2 font-bold z-40 opacity-97`}>
+          Previous 30 Days
+        </h1>
+        <div className={`${isMobile ? "bg-neutral-800":"bg-neutral-800"} flex-auto`}>
+          <div className="flex flex-col w-full">
+            {tabContent.map((tab, i) => (
+              <div
+                key={i}
+                onClick={() => handleTabClick(i)}
+                className={`w-[80%] mx-auto ps-4 pe-2 py-4 text-left border-b border-gray-600 cursor-pointer ${
+                  selectedTab === i ? (isMobile ? "text-white" : "bg-fuchsia-400 opacity-80 rounded-xl text-white") : ""
+                } font-sans`}
+                style={{ fontFamily: "'SF Pro Display', sans-serif" }}
+              >
+                <div className="font-bold z-6">{tab.title}</div>
+                <div className="flex space-x-2">
+                  <div className="text-sm text-gray-400">{tab.date.split(' at ')[1]}</div>
+                  <div className="pl-1 text-sm text-gray-500 truncate">{tab.text.substring(0, 30)}...</div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Right Section: Content */}
-      <div className="w-3/4 bg-neutral-900 text-white">
-        <div className="p-4">
-          <h2 className="mb-2 text-sm text-center text-gray-500" style={{ fontFamily: "'SF Pro Display', sans-serif" }}>
-            {tabContent[selectedTab].date} - View Only
-          </h2>
+      {!isMobile && (
+        <div className="w-3/4 bg-neutral-900 text-white">
+          <div className="p-4">
+            <h2 className="mb-2 text-sm text-center text-gray-500" style={{ fontFamily: "'SF Pro Display', sans-serif" }}>
+              {tabContent[selectedTab].date} - View Only
+            </h2>
 
-          {tabContent[selectedTab] && (
-            <>
-              <div className="px-4 rounded">
-                <h3 className="text-lg font-extrabold" style={{ fontFamily: "'SF Pro Display', sans-serif" }}>{tabContent[selectedTab].title}</h3>
-              </div>
-              <div className="mb-4 px-4 rounded" style={{ fontFamily: "'SF Pro Display', sans-serif" }}>
-                {tabContent[selectedTab].text}
-              </div>
-              <video controls className="w-full h-auto px-4" poster={tabContent[selectedTab].thumbnail}>
-                <source src={tabContent[selectedTab].video} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </>
-          )}
+            {tabContent[selectedTab] && (
+              <>
+                <div className="px-4 rounded">
+                  <h3 className="text-xl font-extrabold" style={{ fontFamily: "'SF Pro Display', sans-serif" }}>{tabContent[selectedTab].title}</h3>
+                </div>
+                <div className="px-4 pb-5 rounded-lg text-white my-4" style={{ fontFamily: "'SF Pro Display', sans-serif", whiteSpace: "pre-line" }}>
+  {tabContent[selectedTab].text}
+</div>
+
+                <video controls className="w-full h-auto px-4" poster={tabContent[selectedTab].thumbnail}>
+                  <source src={tabContent[selectedTab].video} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </>
+            )}
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* Mobile View */}
+      <AnimatePresence>
+        {isMobile && showContent && (
+          <motion.div
+            key="content"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "tween", duration: 0.3 }}
+            className="w-full bg-neutral-900 text-white p-4 fixed inset-0 z-50"
+          >
+            <div onClick={handleBack} className="flex items-center mb-4 cursor-pointer">
+              <span className="text-2xl mr-2">←</span> {/* Left-pointing arrow */}
+              <span className="text-xl font-bold">Notes</span> {/* "Notes" text */}
+            </div>
+            <h2 className="mb-2 text-sm text-center text-gray-500">
+              {tabContent[selectedTab].date} - View Only
+            </h2>
+            <h3 className="px-4 pt-4 text-lg font-extrabold">{tabContent[selectedTab].title}</h3>
+            <div className="px-4 pb-10 rounded-lg text-white my-4" style={{ fontFamily: "'SF Pro Display', sans-serif", whiteSpace: "pre-line" }}>{tabContent[selectedTab].text}</div>
+            <video controls className="mt-5 w-full h-auto" poster={tabContent[selectedTab].thumbnail}>
+              <source src={tabContent[selectedTab].video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
