@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const tabContent = [
-  { title: "Things to do", text: "go to bed maybe??\nRead a book, cry some more.\nmaybe go to the zoo", video: "video1.mp4", thumbnail: "thumbnail1.jpg", date: "February 1, 2025 at 10:00AM" },
+  { title: "Things to do", text: "go to bed maybe??\nRead a book, take some notes.\nmaybe go to the zoo", video: "video1.mp4", thumbnail: "thumbnail1.jpg", date: "February 1, 2025 at 10:00AM" },
   { title: "Placeholder title for Tab 2", text: "Placeholder text for Tab 2", video: "video2.mp4", thumbnail: "thumbnail2.jpg", date: "February 15, 2025 at 2:30PM" },
   { title: "Placeholder title for Tab 3", text: "Placeholder text for Tab 3", video: "video3.mp4", thumbnail: "thumbnail3.jpg", date: "March 3, 2025 at 1:00PM" },
   { title: "Placeholder title for Tab 4", text: "Placeholder text for Tab 4", video: "video4.mp4", thumbnail: "thumbnail4.jpg", date: "March 10, 2025 at 4:45PM" },
