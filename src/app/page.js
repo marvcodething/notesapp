@@ -49,7 +49,7 @@ export default function Home() {
     <div className="flex min-h-screen">
       {/* Left Section: Tabs */}
       <div
-        className={`${isMobile ? (showContent ? "opacity-0 transition-opacity duration-300" : "w-full bg-neutral-800") : "w-1/4 bg-neutral-800 border-r-2"} text-white overflow-y-auto h-screen border-black border`}
+        className={`${isMobile ? (showContent ? "opacity-0 transition-opacity duration-300" : "w-full bg-neutral-800") : "w-1/4 bg-neutral-800 border-r-2"} text-white overflow-y-auto h-screen border-black border-x`}
       >
         <h1 className={`${isMobile ? "sticky top-0 z-50 bg-neutral-800":""} p-3 text-2xl font-extrabold font-sans`}>Notes</h1>
         <h1 className={`${isMobile ? "bg-neutral-800 top-12" : "sticky top-0 bg-neutral-800"} border-b border-gray-700 px-4 w-full flex mx-auto text-left py-2 font-bold z-40 opacity-97`}>
