@@ -15,11 +15,12 @@ const tabContent = [
   { title: "Mourning While Living - Ruby King", text: "Dream Recording Oct 14, 2024\n\ni feel magga and the women she is now. for two nights in a row i visit her.\nfor two nights in a row a sob in my dream, i didn't even know that was possible.\nthis time mom and charles were there.\ni sobbed and said this is the year of regret", video: "https://youtu.be/nF0tfjGqZhw", thumbnail: "thumbnail9.jpg", date: "February 25, 2025 at 5:30PM" },
   { title: "Dj Songs - Ava Zagoria", text: "- Money trees X panda\n- Nokia x modern jam\n- Panda x still don't know my name", video: "https://youtu.be/4qf7FVyU9DM", thumbnail: "thumbnail10.jpg", date: "March 15, 2025 at 8:00AM" },
   { title: "Goals For Spring Break - Brown Schneider", text: "1. Take Bula for a walk\n2. Finally get a drivers license", video: "https://youtu.be/pIkkb5tqPpY", thumbnail: "thumbnail11.jpg", date: "February 5, 2025 at 6:00PM" },
-  { title: "Outfit Ideas - Meg Tomonari", text: "- Black t-shirt\n- Jeans\n- White long shirt\n- Green sweater\n- Black dress", video: "video12.mp4", thumbnail: "thumbnail12.jpg", date: "March 20, 2025 at 10:30AM" },
-  { title: "Remember Before You Play - Ella Sran", text: "The ball didn’t sound as good or kick as well because it was flat, so grab the soccer pump before playing with Emma next time. That should make it sound better.", video: "video13.mp4", thumbnail: "thumbnail13.jpg", date: "February 10, 2025 at 7:45PM" },
-  { title: "My (written) Notes App - Sloan Wittliff", text: "My notes app contains the most mundane things.\nBut buried between them are some of the most important things I've written for myself.", video: "video14.mp4", thumbnail: "thumbnail14.jpg", date: "March 25, 2025 at 1:15PM" },
-  { title: "Dreams - Jack Sabee-Paulson", text: "March 19 2025\n\nDream:", video: "video15.mp4", thumbnail: "thumbnail15.jpg", date: "March 19, 2025 at 6:00AM" },
-  { title: "Admin Day - Luca Sonne", text: "Laundry\nMeasure for measure act ii\n Clean room/bathroom\nTarget", video: "video16.mp4", thumbnail: "thumbnail16.jpg", date: "March 30, 2025 at 9:00AM" }
+  { title: "Outfit Ideas - Meg Tomonari", text: "- Black t-shirt\n- Jeans\n- White long shirt\n- Green sweater\n- Black dress", video: "https://youtu.be/QVY2ZPMrkJo", thumbnail: "thumbnail12.jpg", date: "March 20, 2025 at 10:30AM" },
+  { title: "Remember Before You Play - Ella Sran", text: "The ball didn't sound as good or kick as well because it was flat, so grab the soccer pump before playing with Emma next time. That should make it sound better.", video: "https://youtu.be/Cx9NEvMG4l8", thumbnail: "thumbnail13.jpg", date: "February 10, 2025 at 7:45PM" },
+  { title: "My (written) Notes App - Sloan Wittliff", text: "My notes app contains the most mundane things.\nBut buried between them are some of the most important things I've written for myself.", video: "https://youtu.be/5068t30k16o", thumbnail: "thumbnail14.jpg", date: "March 25, 2025 at 1:15PM" },
+  { title: "Dreams - Jack Sabee-Paulson", text: "March 19 2025\n\nDream:", video: "https://youtu.be/4L9k02v07wI", thumbnail: "thumbnail15.jpg", date: "March 19, 2025 at 6:00AM" },
+  { title: "Admin Day - Luca Sonne", text: "Laundry\nMeasure for measure act ii\n Clean room/bathroom\nTarget", video: "https://youtu.be/ceQw69-8zQU", thumbnail: "thumbnail16.jpg", date: "March 30, 2025 at 9:00AM" },
+  { title: "Cookies - Lena Schindler", text: "flour\n2 eggs\nbutter\brown sugar, white sugar", video: "https://youtu.be/6Bk4qaJ_kCg", thumbnail: "thumbnail16.jpg", date: "March 30, 2025 at 9:00AM" }
 ];
 
 // First, create a helper function to check if the video is a YouTube URL
@@ -28,7 +29,7 @@ const isYouTubeUrl = (url) => url.includes('youtu.be') || url.includes('youtube.
 // Function to convert YouTube URL to embed URL
 const getYouTubeEmbedUrl = (url) => {
   if (url.includes('youtu.be')) {
-    const videoId = url.split('youtu.be/')[1];
+    const videoId = url.split('youtu.be/')[1].split('?')[0];
     return `https://www.youtube.com/embed/${videoId}`;
   }
   return url;
