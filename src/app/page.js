@@ -20,7 +20,8 @@ const tabContent = [
   { title: "My (written) Notes App - Sloan Wittliff", text: "My notes app contains the most mundane things.\nBut buried between them are some of the most important things I've written for myself.", video: "https://youtu.be/5068t30k16o", thumbnail: "thumbnail14.jpg", date: "March 25, 2025 at 1:15PM" },
   { title: "Dreams - Jack Sabee-Paulson", text: "March 19 2025\n\nDream:", video: "https://youtu.be/4L9k02v07wI", thumbnail: "thumbnail15.jpg", date: "March 19, 2025 at 6:00AM" },
   { title: "Admin Day - Luca Sonne", text: "Laundry\nMeasure for measure act ii\n Clean room/bathroom\nTarget", video: "https://youtu.be/ceQw69-8zQU", thumbnail: "thumbnail16.jpg", date: "March 30, 2025 at 9:00AM" },
-  { title: "Cookies - Lena Schindler", text: "flour\n2 eggs\nbutter\brown sugar, white sugar", video: "https://youtu.be/6Bk4qaJ_kCg", thumbnail: "thumbnail16.jpg", date: "March 30, 2025 at 9:00AM" }
+  { title: "Cookies - Lena Schindler", text: "flour\n2 eggs\nbutter\brown sugar, white sugar", video: "https://youtu.be/6Bk4qaJ_kCg", thumbnail: "thumbnail16.jpg", date: "March 30, 2025 at 9:00AM" },
+  { title: "NOTE TO SELF", text: "Beyond the specific use profiled in individual site entries, students in class were surveyed about their other uses of the notes app.", video: "", thumbnail: "/assets/thumbnails/secondThumbnail.jpeg", date: "March 30, 2025 at 9:00AM" }
 ];
 
 // First, create a helper function to check if the video is a YouTube URL
@@ -108,7 +109,7 @@ export default function Home() {
                   {tabContent[selectedTab].text}
                 </div>
                 
-                {selectedTab === 0 ? (
+                {selectedTab === 0 || 16 ? (
                   <img src={tabContent[selectedTab].thumbnail} alt="Note to Self" className="w-full h-auto px-4" />
                 ) : (
                   tabContent[selectedTab].video && (
